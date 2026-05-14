@@ -1,0 +1,15 @@
+[project]
+name = "career-outreach-engine"
+version = "0.1.0"
+description = "CLI tool that automates personalised job outreach emails"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "notion-client>=2.0.0",
+    "litellm>=1.0.0",
+    "pdfplumber>=0.9.0",
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.0",
+    "python-dotenv>=1.0.0",
+    "lxml>=4.9.0",
+]

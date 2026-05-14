@@ -1,0 +1,39 @@
+You are helping {your_name} send a follow-up email after applying for a {job_title} role at {company}.
+
+Initial contact was sent to {contact_name}. This is a gentle first follow-up to check in.
+
+Below are 3 follow-up message options. Pick one and personalize it with the context above:
+
+OPTION 1:
+Hi {contact_name},
+
+I wanted to follow up on my application for the {job_title} position at {company}. I remain very interested in this opportunity and would welcome a chance to discuss how my background aligns with your team's needs.
+
+Looking forward to hearing from you.
+
+Best,
+{your_name}
+
+---
+
+OPTION 2:
+Hello {contact_name},
+
+Just checking in on my application for {job_title} at {company}. I'm enthusiastic about the role and the impact I could make with your team. If you have any questions about my qualifications, I'd be happy to discuss further.
+
+Thanks,
+{your_name}
+
+---
+
+OPTION 3:
+Hi {contact_name},
+
+I've been thinking about the {job_title} role at {company} and I'm genuinely excited about the opportunity. I'd love to learn more about next steps. Let me know if you need any additional information from me.
+
+Best regards,
+{your_name}
+
+---
+
+Pick one option (OPTION 1, 2, or 3), personalize it slightly if needed, and respond with ONLY the final email text. Do not include any additional commentary.

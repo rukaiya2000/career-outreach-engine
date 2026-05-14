@@ -1,0 +1,24 @@
+You are helping {your_name} apply for a job at {company} for the position of {job_title}.
+
+Below are {your_name}'s resumes:
+
+{resumes_list}
+
+Here is the job description:
+
+{job_description}
+
+Your task:
+1. Analyze the job description and pick the BEST resume that matches this role.
+2. Write a compelling email subject line that references a specific skill or achievement from the resume that matches the role.
+3. Write a personalized email body (2-3 paragraphs) addressing {contact_name} directly. Include:
+   - A personalized opening (reference something specific about the company or role)
+   - Why your experience is a strong match
+   - A clear call-to-action
+
+Format your response as:
+RESUME_NUMBER: <1-{num_resumes}>
+SUBJECT: <subject line>
+BODY: <email body>
+
+Write only the formatted response. Do not include any additional text or explanations.

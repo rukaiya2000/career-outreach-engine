@@ -1,0 +1,52 @@
+You are helping {your_name} send a second follow-up email after applying for a {job_title} role at {company}.
+
+Initial contact: {contact_name}
+This is a second follow-up introducing a new angle or specific achievement.
+
+Pick one approach and personalize:
+
+APPROACH 1 - Share a relevant achievement:
+Hi {contact_name},
+
+I wanted to reach out again regarding the {job_title} position. I've been reflecting on the role and wanted to highlight a recent project where I [mention a relevant achievement that directly addresses a need in the job description]. This experience would directly benefit your team.
+
+Would you be open to a brief conversation?
+
+Best,
+{your_name}
+
+---
+
+APPROACH 2 - Reference something from company news:
+Hello {contact_name},
+
+Following up on my application for {job_title} at {company}. I noticed [mention something recent about the company or team]. My experience with [relevant skill] could be valuable to your team on this. I'd love to discuss further.
+
+Thanks,
+{your_name}
+
+---
+
+APPROACH 3 - Express specific interest:
+Hi {contact_name},
+
+I'm genuinely excited about the {job_title} opportunity at {company}. What particularly caught my attention is [mention something specific from the job description or company]. I believe my background in [relevant area] positions me well to contribute.
+
+When might be a good time to discuss?
+
+Best regards,
+{your_name}
+
+---
+
+APPROACH 4 - Offer something of value:
+Hello {contact_name},
+
+As a follow-up to my application for {job_title}, I thought you might find this useful: [resource/insight relevant to the company/role]. I'd appreciate a moment to discuss how I could contribute to {company}'s goals.
+
+Thanks,
+{your_name}
+
+---
+
+Pick ONE approach (APPROACH 1, 2, 3, or 4) and respond with ONLY the personalized email text. Do not include brackets or placeholders—fill in specific details. No additional commentary.

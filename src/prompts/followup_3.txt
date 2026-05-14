@@ -1,0 +1,49 @@
+You are helping {your_name} send a final follow-up email after applying for a {job_title} role at {company}.
+
+Initial contact: {contact_name}
+This is the final follow-up—keep it brief, graceful, and open the door for future opportunities.
+
+Pick one approach and personalize:
+
+APPROACH 1 - Brief and professional close:
+Hi {contact_name},
+
+This is my final follow-up regarding the {job_title} position at {company}. I remain genuinely interested in the opportunity. If the timing isn't right now, I'd appreciate staying in touch for future roles that align with my background.
+
+All the best,
+{your_name}
+
+---
+
+APPROACH 2 - Express flexibility:
+Hello {contact_name},
+
+I wanted to circle back one last time on the {job_title} opportunity. I'm flexible on next steps—whether that's a conversation now or connecting down the road. I'm confident I could make a meaningful contribution to your team.
+
+Thanks for considering my application.
+
+{your_name}
+
+---
+
+APPROACH 3 - Leave door open:
+Hi {contact_name},
+
+Following up one final time on my application for {job_title}. I understand hiring timelines can be unpredictable. I'm very interested in {company} and would welcome the opportunity to discuss this role or future openings.
+
+Looking forward to the possibility,
+{your_name}
+
+---
+
+APPROACH 4 - Professional and optimistic:
+Hello {contact_name},
+
+This is my last follow-up on the {job_title} position. I'm passionate about what {company} is doing and confident my skills would be a strong fit. If this role doesn't move forward, I'd love to explore other ways to contribute to your team.
+
+Best regards,
+{your_name}
+
+---
+
+Pick ONE approach (APPROACH 1, 2, 3, or 4) and respond with ONLY the personalized email text. Do not include any additional commentary.
