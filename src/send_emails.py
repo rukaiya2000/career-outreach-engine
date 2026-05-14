@@ -134,22 +134,22 @@ def send_initial_emails(dry_run=False):
         subject = (props.get("Subject", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", "")
         body = (props.get("Email Body", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", "")
         name = props.get("Name", {}).get("title", [{}])[0].get("text", {}).get("content", "")
-        company = (
-            props.get("Company", {}).get("rich_text", [{}])[0].get("text", {}).get("content", "")
-        )
+        company = (props.get("Company", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", "")
+        resume = (props.get("Resume Used", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", "")
 
         if not email or not subject or not body:
             logger.warning(f"Row {page_id} ({name} at {company}) missing email/subject/body")
             continue
 
-        logger.info(f"Sending to {email} ({name} at {company})")
+        logger.info(f"Sending to {email} ({name} at {company}) with resume: {resume}")
 
         if dry_run:
             logger.info(f"[DRY RUN] Would send to {email}")
             logger.info(f"Subject: {subject}")
+            logger.info(f"Resume: {resume}")
             logger.info(f"Body: {body[:100]}...")
         else:
-            if send_email(email, subject, body):
+            if send_email(email, subject, body, resume_filename=resume):
                 try:
                     update_sent(page_id, followup_count=0)
                     sent += 1
