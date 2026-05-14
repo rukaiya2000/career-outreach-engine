@@ -131,10 +131,8 @@ def send_initial_emails(dry_run=False):
         page_id = row["id"]
 
         email = props.get("HR Email", {}).get("email")
-        subject = props.get("Subject", {}).get("title", [{}])[0].get("text", {}).get("content", "")
-        body = (
-            props.get("Email Body", {}).get("rich_text", [{}])[0].get("text", {}).get("content", "")
-        )
+        subject = (props.get("Subject", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", "")
+        body = (props.get("Email Body", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", "")
         name = props.get("Name", {}).get("title", [{}])[0].get("text", {}).get("content", "")
         company = (
             props.get("Company", {}).get("rich_text", [{}])[0].get("text", {}).get("content", "")
