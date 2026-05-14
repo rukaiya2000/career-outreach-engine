@@ -63,19 +63,24 @@ def draft_email_for_row(row, resumes, refresh_resumes=False):
         props.get("Job Title", {}).get("rich_text", [{}])[0].get("text", {}).get("content", "")
     )
     jd_url = props.get("Job Description URL", {}).get("url", "")
-
-    if not jd_url:
-        logger.warning(
-            f"Row {page_id} ({name} at {company}) has no Job Description URL. Skipping."
-        )
-        return False
+    jd_text_manual = (
+        (props.get("Job Description Text", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", "")
+    )
 
     logger.info(f"Processing: {name} at {company} for {job_title}")
 
-    try:
-        jd_text = scrape(jd_url)
-    except Exception as e:
-        logger.error(f"Failed to scrape JD from {jd_url}: {e}")
+    if jd_url:
+        try:
+            jd_text = scrape(jd_url)
+            logger.info("Scraped job description from URL")
+        except Exception as e:
+            logger.warning(f"Failed to scrape JD from {jd_url}: {e}. Falling back to pasted text.")
+            jd_text = jd_text_manual
+    else:
+        jd_text = jd_text_manual
+
+    if not jd_text.strip():
+        logger.warning(f"Row {page_id} ({name} at {company}) has no JD URL or text. Skipping.")
         return False
 
     if refresh_resumes or not resumes:

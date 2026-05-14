@@ -48,6 +48,7 @@ def setup_database(parent_page_id: str):
             "HR Email": {"email": {}},
             "Job Title": {"rich_text": {}},
             "Job Description URL": {"url": {}},
+            "Job Description Text": {"rich_text": {}},
             "Subject": {"rich_text": {}},
             "Email Body": {"rich_text": {}},
             "Resume Used": {"rich_text": {}},
