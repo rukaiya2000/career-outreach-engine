@@ -21,6 +21,14 @@ FOLLOWUP_DAYS_3 = int(os.getenv("FOLLOWUP_DAYS_3", "14"))
 MAX_EMAILS_PER_RUN = int(os.getenv("MAX_EMAILS_PER_RUN", "20"))
 YOUR_NAME = os.getenv("YOUR_NAME", "")
 
+EMAIL_MAX_WORDS = int(os.getenv("EMAIL_MAX_WORDS", "200"))
+
+FEW_SHOT_MODE = os.getenv("FEW_SHOT_MODE", "random")  # none | random | similarity
+FEW_SHOT_N = int(os.getenv("FEW_SHOT_N", "3"))
+FEW_SHOT_K = int(os.getenv("FEW_SHOT_K", "3"))
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "openai/text-embedding-3-small")
+EMBEDDING_API_KEY = os.getenv("EMBEDDING_API_KEY", "") or LLM_API_KEY
+
 PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 LOGS_DIR = PROJECT_ROOT / "logs"

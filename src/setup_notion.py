@@ -44,6 +44,7 @@ def setup_database(parent_page_id: str):
         "title": [{"type": "text", "text": {"content": "Job Outreach"}}],
         "properties": {
             "Name": {"title": {}},
+            "Row ID": {"unique_id": {}},
             "Company": {"rich_text": {}},
             "HR Email": {"email": {}},
             "Job Title": {"rich_text": {}},
@@ -105,19 +106,56 @@ def setup_database(parent_page_id: str):
     return db_id
 
 
-def main():
-    if len(sys.argv) < 2:
-        print("Usage: python src/setup_notion.py <notion-page-url>")
-        print("\nExample: python src/setup_notion.py https://www.notion.so/My-Page-abc123")
+def migrate_add_unique_id(db_id_or_url: str):
+    """Add a Row ID (unique_id) property to an existing Notion database."""
+    if not NOTION_API_KEY:
+        print("Error: NOTION_API_KEY not set in .env")
         sys.exit(1)
 
-    page_url = sys.argv[1]
-
     try:
-        page_id = extract_page_id(page_url)
-        setup_database(page_id)
-    except Exception as e:
-        print(f"Error: {e}")
+        db_id = extract_page_id(db_id_or_url)
+    except ValueError:
+        db_id = db_id_or_url.strip()
+
+    print(f"Adding 'Row ID' (unique_id) property to database {db_id}...")
+
+    resp = requests.patch(
+        f"https://api.notion.com/v1/databases/{db_id}",
+        headers=headers(),
+        json={"properties": {"Row ID": {"unique_id": {}}}},
+    )
+
+    if not resp.ok:
+        print(f"Error: {resp.status_code} {resp.text}")
+        sys.exit(1)
+
+    print("  ✓ 'Row ID' property added. Notion will auto-assign IDs to all existing rows.")
+
+
+def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Set up or migrate the Notion Job Outreach database")
+    parser.add_argument("page_url", nargs="?", help="Notion page URL to create the database under")
+    parser.add_argument(
+        "--migrate-id",
+        metavar="DB_URL_OR_ID",
+        help="Add unique_id 'Row ID' column to an existing database",
+    )
+
+    args = parser.parse_args()
+
+    if args.migrate_id:
+        migrate_add_unique_id(args.migrate_id)
+    elif args.page_url:
+        try:
+            page_id = extract_page_id(args.page_url)
+            setup_database(page_id)
+        except Exception as e:
+            print(f"Error: {e}")
+            sys.exit(1)
+    else:
+        parser.print_help()
         sys.exit(1)
 
 

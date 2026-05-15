@@ -12,10 +12,12 @@ from src.config import (
     PROMPTS_DIR,
     LOGS_DIR,
     YOUR_NAME,
+    EMAIL_MAX_WORDS,
 )
-from src.notion_api import get_pending_rows, update_draft
+from src.notion_api import get_pending_rows, update_draft, store_jd_text
 from src.jd_scraper import scrape
 from src.resume_selector import get_resume_cache, select_resume
+from src.few_shot import get_few_shot_examples, format_few_shot_section
 
 logging.basicConfig(
     level=logging.INFO,
@@ -51,7 +53,7 @@ def parse_initial_email_response(response_text: str) -> dict:
     return result
 
 
-def draft_email_for_row(row, resumes, refresh_resumes=False):
+def draft_email_for_row(row, resumes, dry_run=False):
     page_id = row["id"]
     props = row["properties"]
 
@@ -83,8 +85,14 @@ def draft_email_for_row(row, resumes, refresh_resumes=False):
         logger.warning(f"Row {page_id} ({name} at {company}) has no JD URL or text. Skipping.")
         return False
 
-    if refresh_resumes or not resumes:
-        resumes = get_resume_cache(refresh=refresh_resumes)
+    if not dry_run:
+        try:
+            store_jd_text(page_id, jd_text)
+        except Exception as e:
+            logger.warning(f"Failed to store JD text in Notion: {e}")
+
+    if not resumes:
+        resumes = get_resume_cache()
 
     if not resumes:
         logger.error("No resumes found. Please add PDFs to resumes/ directory.")
@@ -99,6 +107,9 @@ def draft_email_for_row(row, resumes, refresh_resumes=False):
 
     resume_list = "\n".join(f"{i+1}. {name}" for i, name in enumerate(resumes.keys()))
 
+    examples = get_few_shot_examples(jd_text)
+    few_shot_section = format_few_shot_section(examples)
+
     prompt_file = PROMPTS_DIR / "initial_email.txt"
     with open(prompt_file, "r") as f:
         prompt_template = f.read()
@@ -111,6 +122,8 @@ def draft_email_for_row(row, resumes, refresh_resumes=False):
         resumes_list=resume_list,
         job_description=jd_text,
         num_resumes=len(resumes),
+        max_words=EMAIL_MAX_WORDS,
+        few_shot_section=few_shot_section,
     )
 
     try:
@@ -130,6 +143,10 @@ def draft_email_for_row(row, resumes, refresh_resumes=False):
     if not parsed["subject"] or not parsed["body"]:
         logger.error(f"Failed to parse email response: {response_text}")
         return False
+
+    word_count = len(parsed["body"].split())
+    if word_count > EMAIL_MAX_WORDS:
+        logger.warning(f"Body has {word_count} words (limit is {EMAIL_MAX_WORDS}). Consider editing in Notion.")
 
     logger.info(f"Generated subject: {parsed['subject']}")
 
@@ -179,7 +196,7 @@ def main():
 
     processed = 0
     for row in pending_rows[:MAX_EMAILS_PER_RUN]:
-        result = draft_email_for_row(row, resumes, refresh_resumes=args.refresh_resumes)
+        result = draft_email_for_row(row, resumes, dry_run=args.dry_run)
 
         if result:
             if args.dry_run:

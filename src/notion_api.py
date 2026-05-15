@@ -1,3 +1,4 @@
+import logging
 import requests
 from datetime import datetime
 from src.config import NOTION_API_KEY, NOTION_DATABASE_ID
@@ -9,15 +10,27 @@ HEADERS = {
     "Notion-Version": "2022-06-28",
 }
 
+NOTION_RICH_TEXT_LIMIT = 2000
+
+logger = logging.getLogger(__name__)
+
 
 def _query(filter_body: dict) -> list:
-    resp = requests.post(
-        f"{BASE_URL}/databases/{NOTION_DATABASE_ID}/query",
-        headers=HEADERS,
-        json={"filter": filter_body},
-    )
-    resp.raise_for_status()
-    return resp.json().get("results", [])
+    results = []
+    body = {"filter": filter_body, "page_size": 100}
+    while True:
+        resp = requests.post(
+            f"{BASE_URL}/databases/{NOTION_DATABASE_ID}/query",
+            headers=HEADERS,
+            json=body,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        results.extend(data.get("results", []))
+        if not data.get("has_more"):
+            break
+        body["start_cursor"] = data["next_cursor"]
+    return results
 
 
 def _update(page_id: str, properties: dict):
@@ -57,12 +70,34 @@ def get_rows_for_followup() -> list:
     return rows
 
 
+def get_approved_examples() -> list:
+    """Return rows where Approved=True and Email Body is non-empty."""
+    rows = _query({"property": "Approved", "checkbox": {"equals": True}})
+    examples = []
+    for row in rows:
+        props = row["properties"]
+        body = (props.get("Email Body", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", "")
+        if body.strip():
+            examples.append(row)
+    return examples
+
+
 def update_draft(page_id: str, subject: str, body: str, resume_used: str):
     _update(page_id, {
         "Subject": {"rich_text": [{"text": {"content": subject}}]},
         "Email Body": {"rich_text": [{"text": {"content": body}}]},
         "Resume Used": {"rich_text": [{"text": {"content": resume_used}}]},
         "Status": {"select": {"name": "Draft"}},
+    })
+
+
+def store_jd_text(page_id: str, jd_text: str):
+    """Write scraped JD text back to Notion (truncated to Notion's rich_text limit)."""
+    if len(jd_text) > NOTION_RICH_TEXT_LIMIT:
+        logger.warning(f"JD text truncated from {len(jd_text)} to {NOTION_RICH_TEXT_LIMIT} chars for Notion storage")
+        jd_text = jd_text[:NOTION_RICH_TEXT_LIMIT]
+    _update(page_id, {
+        "Job Description Text": {"rich_text": [{"text": {"content": jd_text}}]},
     })
 
 

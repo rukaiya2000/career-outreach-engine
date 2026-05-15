@@ -11,10 +11,18 @@ Here is the job description:
 Your task:
 1. Analyze the job description and pick the BEST resume that matches this role.
 2. Write a compelling email subject line that references a specific skill or achievement from the resume that matches the role.
-3. Write a personalized email body (2-3 paragraphs) addressing {contact_name} directly. Include:
+3. Write a personalized email body (1-2 paragraph) addressing {contact_name} directly. Include:
    - A personalized opening (reference something specific about the company or role)
    - Why your experience is a strong match
    - A clear call-to-action
+
+Rules:
+- The email body MUST open with {contact_name}'s name (e.g. "Hi {contact_name}," or "Dear {contact_name},"). Never use generic salutations like "Dear Hiring Manager", "Hi there", or "To Whom It May Concern". Only use first name.
+- The email body MUST be under {max_words} words. Be concise and direct.
+- Do not use em dashes
+- The content should have a casual tone as written by the {your_name} as the author.
+
+{few_shot_section}
 
 Format your response as:
 RESUME_NUMBER: <1-{num_resumes}>
