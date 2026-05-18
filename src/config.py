@@ -13,6 +13,7 @@ EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD", "")
 MODEL_PROVIDER = os.getenv("MODEL_PROVIDER", "anthropic")
 MODEL_NAME = os.getenv("MODEL_NAME", "claude-sonnet-4-5")
 LLM_API_KEY = os.getenv("LLM_API_KEY", "")
+LLM_BASE_URL = os.getenv("LLM_BASE_URL") or None
 LLM_MODEL = f"{MODEL_PROVIDER}/{MODEL_NAME}"
 
 FOLLOWUP_DAYS_1 = int(os.getenv("FOLLOWUP_DAYS_1", "4"))

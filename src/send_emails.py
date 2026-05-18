@@ -15,6 +15,7 @@ from src.config import (
     YOUR_NAME,
     PROMPTS_DIR,
     LOGS_DIR,
+    LLM_BASE_URL,
 )
 from src.notion_api import (
     get_rows_to_send,
@@ -108,6 +109,7 @@ def generate_followup_email(row, followup_stage):
             model=LLM_MODEL,
             messages=[{"role": "user", "content": prompt}],
             api_key=LLM_API_KEY,
+            base_url=LLM_BASE_URL,
             temperature=0.7,
         )
         body = response["choices"][0]["message"]["content"].strip()

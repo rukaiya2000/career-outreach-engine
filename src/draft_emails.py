@@ -9,6 +9,7 @@ from src.config import (
     MAX_EMAILS_PER_RUN,
     LLM_MODEL,
     LLM_API_KEY,
+    LLM_BASE_URL,
     PROMPTS_DIR,
     LOGS_DIR,
     YOUR_NAME,
@@ -131,6 +132,7 @@ def draft_email_for_row(row, resumes, dry_run=False):
             model=LLM_MODEL,
             messages=[{"role": "user", "content": prompt}],
             api_key=LLM_API_KEY,
+            base_url=LLM_BASE_URL,
             temperature=0.7,
         )
         response_text = response["choices"][0]["message"]["content"].strip()

@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 import pdfplumber
 import litellm
-from src.config import RESUMES_DIR, DATA_DIR, LLM_MODEL, LLM_API_KEY
+from src.config import RESUMES_DIR, DATA_DIR, LLM_MODEL, LLM_API_KEY, LLM_BASE_URL
 
 
 CACHE_FILE = DATA_DIR / "resume_cache.json"
@@ -81,6 +81,7 @@ Do not include any other text."""
         model=LLM_MODEL,
         messages=[{"role": "user", "content": prompt}],
         api_key=LLM_API_KEY,
+        base_url=LLM_BASE_URL,
         temperature=0.3,
     )
 
