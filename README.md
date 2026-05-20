@@ -1,4 +1,4 @@
-# Career Outreach Engine
+# Pitch Craft
 
 A CLI tool that automates personalized job outreach emails. Notion is the single interface — no terminal prompts.
 
