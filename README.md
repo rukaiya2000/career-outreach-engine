@@ -61,7 +61,7 @@ Notion is the single dashboard. Every job, every status, every draft lives there
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/job-pilot.git
+git clone https://github.com/rukaiya2000/job-pilot.git
 cd job-pilot
 
 # Using uv (recommended)
