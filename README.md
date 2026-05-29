@@ -242,6 +242,12 @@ logs/
 
 ---
 
+## Acknowledgements
+
+The `/job-apply`, `/job-search`, and `/job-preferences` skills were inspired by and partially built on top of [neonwatty/job-apply-plugin](https://github.com/neonwatty/job-apply-plugin). Credit to that project for the foundational ideas behind the Claude Code skill structure for job automation.
+
+---
+
 ## License
 
 MIT © Rukaiya Khan
