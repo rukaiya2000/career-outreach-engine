@@ -1,0 +1,45 @@
+{
+  "preferences": {
+    "targetTitles": [
+      "Software Engineer Intern",
+      "Software Engineering Intern",
+      "Frontend Engineer Intern",
+      "Frontend Developer Intern",
+      "Full Stack Engineer Intern",
+      "Full Stack Developer Intern",
+      "AI Engineer Intern",
+      "AI/ML Engineer Intern",
+      "Machine Learning Engineer Intern",
+      "LLM Engineer Intern",
+      "Generative AI Intern",
+      "Agentic AI Intern",
+      "Data Science Intern",
+      "Backend Engineer Intern",
+      "React Developer Intern",
+      "Web Developer Intern",
+      "Software Developer Intern",
+      "Frontend Engineer",
+      "AI Engineer",
+      "Software Engineer",
+      "Full Stack Engineer",
+      "Machine Learning Engineer"
+    ],
+    "minBaseSalary": null,
+    "remotePreference": "open to all",
+    "excludePatterns": [],
+    "location": "United States",
+    "employmentType": "internship",
+    "maxApplicants": 100,
+    "skills": {
+      "languages": ["Java", "Python", "JavaScript", "TypeScript"],
+      "frontend": ["React Native", "Next.js", "React.js", "React Hooks", "Redux", "HTML", "CSS", "Tailwind", "SCSS", "SASS"],
+      "databases": ["MySQL", "PostgreSQL", "Redis", "MongoDB", "Firebase", "Amazon RDS", "FAISS", "Pinecone", "Chroma"],
+      "ai": ["RAG", "LangChain", "LangGraph", "MCP", "LangSmith", "Vector Search", "Prompt Engineering", "Agentic Systems", "Tool Calling", "Memory & State Management", "LlamaIndex", "AutoGen", "Tavily"],
+      "backend": ["Node.js", "Express.js", "Nest.js", "REST APIs", "GraphQL", "WebSockets", "FastAPI", "Flask"],
+      "cloud": ["Git", "Docker", "Linux", "AWS Lambda", "API Gateway", "Kinesis", "SQS", "Step Functions", "S3", "EventBridge", "CodePipeline", "CodeBuild", "CloudWatch", "Cognito", "CI/CD", "GitHub Actions"],
+      "other": ["Claude Code", "Microservices", "Puppeteer", "Chromium", "AG Grid", "Bootstrap", "Material UI", "Agile", "Kanban", "Jupyter Notebooks", "Navigator AI"]
+    },
+    "defaultTimeRange": "last 24 hours",
+    "keywordModifiers": ["fall 2026", "internship", "llm", "generative ai", "agentic ai", "data science", "software engineering", "full stack", "frontend", "backend", "react", "python", "java", "javascript", "typescript"]
+  }
+}

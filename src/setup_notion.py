@@ -41,23 +41,66 @@ def setup_database(parent_page_id: str):
 
     body = {
         "parent": {"type": "page_id", "page_id": parent_page_id},
-        "title": [{"type": "text", "text": {"content": "Job Outreach"}}],
+        "title": [{"type": "text", "text": {"content": "Job Automation Pipeline"}}],
         "properties": {
             "Name": {"title": {}},
-            "Row ID": {"unique_id": {}},
+            "Sr No.": {"unique_id": {}},
             "Company": {"rich_text": {}},
-            "HR Email": {"email": {}},
             "Job Title": {"rich_text": {}},
+            "HR Email": {"email": {}},
+            "Job URL": {"url": {}},
             "Job Description URL": {"url": {}},
             "Job Description Text": {"rich_text": {}},
-            "Subject": {"rich_text": {}},
-            "Email Body": {"rich_text": {}},
-            "Resume Used": {"rich_text": {}},
+            "Path": {
+                "select": {
+                    "options": [
+                        {"name": "Cold Outreach", "color": "blue"},
+                        {"name": "Direct Apply", "color": "green"},
+                    ]
+                }
+            },
+            "Apply Platform": {
+                "select": {
+                    "options": [
+                        {"name": "LinkedIn", "color": "blue"},
+                        {"name": "Greenhouse", "color": "green"},
+                        {"name": "Ashby", "color": "purple"},
+                        {"name": "Lever", "color": "orange"},
+                        {"name": "Workday", "color": "red"},
+                        {"name": "Rippling", "color": "yellow"},
+                        {"name": "Other", "color": "gray"},
+                        {"name": "Unknown", "color": "default"},
+                    ]
+                }
+            },
+            "Source": {
+                "select": {
+                    "options": [
+                        {"name": "LinkedIn", "color": "blue"},
+                        {"name": "HN", "color": "orange"},
+                        {"name": "Twitter", "color": "gray"},
+                        {"name": "Manual", "color": "default"},
+                    ]
+                }
+            },
+            "Score": {"number": {"format": "number"}},
+            "Skill Match": {
+                "select": {
+                    "options": [
+                        {"name": "Strong", "color": "green"},
+                        {"name": "Partial", "color": "yellow"},
+                        {"name": "Weak", "color": "red"},
+                    ]
+                }
+            },
+            "Matched Skills": {"rich_text": {}},
             "Status": {
                 "select": {
                     "options": [
+                        {"name": "Discovered", "color": "default"},
                         {"name": "Pending", "color": "blue"},
                         {"name": "Draft", "color": "yellow"},
+                        {"name": "Applied", "color": "green"},
                         {"name": "Emailed", "color": "green"},
                         {"name": "Follow-up 1", "color": "orange"},
                         {"name": "Follow-up 2", "color": "orange"},
@@ -70,7 +113,9 @@ def setup_database(parent_page_id: str):
                 }
             },
             "Approved": {"checkbox": {}},
-            "Last Contacted": {"date": {}},
+            "Subject": {"rich_text": {}},
+            "Email Body": {"rich_text": {}},
+            "Resume Used": {"rich_text": {}},
             "Follow-up Count": {"number": {"format": "number"}},
             "Outcome": {
                 "select": {
@@ -82,6 +127,9 @@ def setup_database(parent_page_id: str):
                 }
             },
             "Notes": {"rich_text": {}},
+            "Last Contacted": {"date": {}},
+            "Created Date": {"created_time": {}},
+            "Last Edited": {"last_edited_time": {}},
         },
     }
 
@@ -104,6 +152,81 @@ def setup_database(parent_page_id: str):
     print(f"NOTION_DATABASE_ID={db_id}\n")
 
     return db_id
+
+
+def migrate_add_discovery_columns(db_id_or_url: str):
+    """Add discovery columns (Job URL, Path, Source, Score, etc.) to an existing database."""
+    if not NOTION_API_KEY:
+        print("Error: NOTION_API_KEY not set in .env")
+        sys.exit(1)
+
+    try:
+        db_id = extract_page_id(db_id_or_url)
+    except ValueError:
+        db_id = db_id_or_url.strip()
+
+    print(f"Adding discovery columns to database {db_id}...")
+
+    new_properties = {
+        "Job URL": {"url": {}},
+        "Path": {
+            "select": {
+                "options": [
+                    {"name": "Cold Outreach", "color": "blue"},
+                    {"name": "Direct Apply", "color": "green"},
+                ]
+            }
+        },
+        "Apply Platform": {
+            "select": {
+                "options": [
+                    {"name": "LinkedIn", "color": "blue"},
+                    {"name": "Greenhouse", "color": "green"},
+                    {"name": "Ashby", "color": "purple"},
+                    {"name": "Lever", "color": "orange"},
+                    {"name": "Workday", "color": "red"},
+                    {"name": "Rippling", "color": "yellow"},
+                    {"name": "Other", "color": "gray"},
+                    {"name": "Unknown", "color": "default"},
+                ]
+            }
+        },
+        "Source": {
+            "select": {
+                "options": [
+                    {"name": "LinkedIn", "color": "blue"},
+                    {"name": "HN", "color": "orange"},
+                    {"name": "Twitter", "color": "gray"},
+                    {"name": "Manual", "color": "default"},
+                ]
+            }
+        },
+        "Score": {"number": {"format": "number"}},
+        "Skill Match": {
+            "select": {
+                "options": [
+                    {"name": "Strong", "color": "green"},
+                    {"name": "Partial", "color": "yellow"},
+                    {"name": "Weak", "color": "red"},
+                ]
+            }
+        },
+        "Matched Skills": {"rich_text": {}},
+    }
+
+    resp = requests.patch(
+        f"https://api.notion.com/v1/databases/{db_id}",
+        headers=headers(),
+        json={"properties": new_properties},
+    )
+
+    if not resp.ok:
+        print(f"Error: {resp.status_code} {resp.text}")
+        sys.exit(1)
+
+    added = list(new_properties.keys())
+    print(f"  ✓ Added columns: {', '.join(added)}")
+    print("\nNote: Also add 'Discovered' and 'Applied' options to your Status select in Notion manually.")
 
 
 def migrate_add_unique_id(db_id_or_url: str):
@@ -142,11 +265,18 @@ def main():
         metavar="DB_URL_OR_ID",
         help="Add unique_id 'Row ID' column to an existing database",
     )
+    parser.add_argument(
+        "--migrate-discovery",
+        metavar="DB_URL_OR_ID",
+        help="Add discovery columns (Job URL, Path, Source, Score, etc.) to an existing database",
+    )
 
     args = parser.parse_args()
 
     if args.migrate_id:
         migrate_add_unique_id(args.migrate_id)
+    elif args.migrate_discovery:
+        migrate_add_discovery_columns(args.migrate_discovery)
     elif args.page_url:
         try:
             page_id = extract_page_id(args.page_url)

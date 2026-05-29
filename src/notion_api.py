@@ -108,3 +108,79 @@ def update_sent(page_id: str, followup_count: int = 0):
         "Last Contacted": {"date": {"start": datetime.now().strftime("%Y-%m-%d")}},
         "Follow-up Count": {"number": followup_count},
     })
+
+
+def job_url_exists(url: str) -> bool:
+    """Return True if a row with this Job URL already exists (deduplication)."""
+    if not url:
+        return False
+    try:
+        rows = _query({"property": "Job URL", "url": {"equals": url}})
+        return len(rows) > 0
+    except Exception:
+        return False
+
+
+def add_discovered_job(payload: dict):
+    """Create a new Notion row for a freshly discovered job."""
+    properties: dict = {
+        "Name": {"title": [{"text": {"content": payload.get("title", "Unknown Role")[:2000]}}]},
+        "Company": {"rich_text": [{"text": {"content": payload.get("company", "")[:2000]}}]},
+        "Job Title": {"rich_text": [{"text": {"content": payload.get("title", "")[:2000]}}]},
+        "Status": {"select": {"name": "Discovered"}},
+    }
+
+    optional_select = {
+        "Path": payload.get("path"),
+        "Source": payload.get("source"),
+        "Apply Platform": payload.get("apply_platform"),
+        "Skill Match": payload.get("skill_match"),
+    }
+    for key, val in optional_select.items():
+        if val:
+            properties[key] = {"select": {"name": val}}
+
+    if payload.get("job_url"):
+        properties["Job URL"] = {"url": payload["job_url"]}
+        properties["Job Description URL"] = {"url": payload["job_url"]}
+    if payload.get("score") is not None:
+        properties["Score"] = {"number": float(payload["score"])}
+    if payload.get("matched_skills"):
+        properties["Matched Skills"] = {
+            "rich_text": [{"text": {"content": payload["matched_skills"][:2000]}}]
+        }
+
+    resp = requests.post(
+        f"{BASE_URL}/pages",
+        headers=HEADERS,
+        json={"parent": {"database_id": NOTION_DATABASE_ID}, "properties": properties},
+    )
+    resp.raise_for_status()
+    return resp.json()
+
+
+def get_page(page_id: str) -> dict:
+    resp = requests.get(f"{BASE_URL}/pages/{page_id}", headers=HEADERS)
+    resp.raise_for_status()
+    return resp.json()
+
+
+def get_approved_direct_apply_rows() -> list:
+    return _query({
+        "and": [
+            {"property": "Approved", "checkbox": {"equals": True}},
+            {"property": "Path", "select": {"equals": "Direct Apply"}},
+        ]
+    })
+
+
+def update_applied(page_id: str, resume_used: str = ""):
+    """Mark a Direct Apply row as Applied after the user submits the form."""
+    props = {
+        "Status": {"select": {"name": "Applied"}},
+        "Approved": {"checkbox": False},
+        "Last Contacted": {"date": {"start": datetime.now().strftime("%Y-%m-%d")}},
+    }
+    if resume_used:
+        props["Resume Used"] = {"rich_text": [{"text": {"content": resume_used}}]}
+    _update(page_id, props)
