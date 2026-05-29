@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Job Automation Pipeline — unified CLI
+Job Pilot — unified CLI
 
 Commands:
   discover   Push latest job search results from /job-search into Notion

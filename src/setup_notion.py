@@ -41,7 +41,7 @@ def setup_database(parent_page_id: str):
 
     body = {
         "parent": {"type": "page_id", "page_id": parent_page_id},
-        "title": [{"type": "text", "text": {"content": "Job Automation Pipeline"}}],
+        "title": [{"type": "text", "text": {"content": "Job Pilot"}}],
         "properties": {
             "Name": {"title": {}},
             "Sr No.": {"unique_id": {}},
