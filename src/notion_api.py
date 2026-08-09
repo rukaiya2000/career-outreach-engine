@@ -130,25 +130,11 @@ def add_discovered_job(payload: dict):
         "Status": {"select": {"name": "Discovered"}},
     }
 
-    optional_select = {
-        "Path": payload.get("path"),
-        "Source": payload.get("source"),
-        "Apply Platform": payload.get("apply_platform"),
-        "Skill Match": payload.get("skill_match"),
-    }
-    for key, val in optional_select.items():
-        if val:
-            properties[key] = {"select": {"name": val}}
+    if payload.get("path"):
+        properties["Path"] = {"select": {"name": payload["path"]}}
 
     if payload.get("job_url"):
         properties["Job URL"] = {"url": payload["job_url"]}
-        properties["Job Description URL"] = {"url": payload["job_url"]}
-    if payload.get("score") is not None:
-        properties["Score"] = {"number": float(payload["score"])}
-    if payload.get("matched_skills"):
-        properties["Matched Skills"] = {
-            "rich_text": [{"text": {"content": payload["matched_skills"][:2000]}}]
-        }
 
     resp = requests.post(
         f"{BASE_URL}/pages",

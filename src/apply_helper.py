@@ -27,7 +27,6 @@ def cmd_get_jobs():
             "company": (props.get("Company", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", ""),
             "job_title": (props.get("Job Title", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", ""),
             "jd_text": (props.get("Job Description Text", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", ""),
-            "apply_platform": (props.get("Apply Platform", {}).get("select") or {}).get("name", ""),
         })
     print(json.dumps(jobs, indent=2))
 

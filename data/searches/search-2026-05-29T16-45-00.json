@@ -1,0 +1,100 @@
+{
+  "searchDate": "2026-05-29",
+  "parameters": {
+    "titles": [
+      "Software Engineer Intern", "Software Engineering Intern", "Frontend Engineer Intern",
+      "Full Stack Engineer Intern", "AI Engineer Intern", "AI/ML Engineer Intern",
+      "Machine Learning Engineer Intern", "LLM Engineer Intern", "Generative AI Intern",
+      "Agentic AI Intern", "Data Science Intern", "Backend Engineer Intern",
+      "React Developer Intern", "Web Developer Intern", "Software Developer Intern"
+    ],
+    "remotePreference": "open to all",
+    "timeRange": "last 24 hours",
+    "sources": ["LinkedIn", "HN", "Twitter"],
+    "maxApplicants": 100,
+    "minSalary": null
+  },
+  "sourceSummary": {
+    "LinkedIn": {"found": 29, "passed": 3, "failed": 26},
+    "HN": {"found": 0, "passed": 0, "note": "378 comments scanned; thread is primarily full-time roles"},
+    "Twitter": {"found": 0, "passed": 0, "note": "Results were job seekers or international posts"}
+  },
+  "results": [
+    {
+      "rank": 1,
+      "title": "Software Engineer Intern",
+      "company": "SK hynix memory solutions America Inc.",
+      "url": "https://www.linkedin.com/jobs/view/4420688486/",
+      "source": "LinkedIn",
+      "score": 57,
+      "skillMatch": "Partial",
+      "skillMatchEmoji": "⚡",
+      "skillMatchPercent": 55,
+      "matchedSkills": ["Python", "JavaScript", "TypeScript", "databases", "Git"],
+      "missingSkills": ["C/C++", "OS/networking"],
+      "location": "San Jose, CA",
+      "workType": "On-site",
+      "salary": "$35/hr – $45/hr",
+      "applyMethod": "Company website",
+      "applicantCount": 82,
+      "postedDate": "15 hours ago",
+      "hiringManager": null,
+      "connections": [{"name": "UF Alumni", "degree": "alumni"}],
+      "sponsorshipRestrictions": false,
+      "fallInternship": true,
+      "notes": "Semiconductor company; storage/test tooling + AI-assisted dev; exact title match"
+    },
+    {
+      "rank": 2,
+      "title": "Internship, Systems Integration Engineer, Tesla Service (Fall 2026)",
+      "company": "Tesla",
+      "url": "https://www.linkedin.com/jobs/view/4420619577/",
+      "source": "LinkedIn",
+      "score": 54,
+      "skillMatch": "Strong",
+      "skillMatchEmoji": "✅",
+      "skillMatchPercent": 80,
+      "matchedSkills": ["MCP", "Prompt Engineering", "Agentic Systems", "Tool Calling", "LLMs", "LangChain", "LangGraph", "Memory & State Management"],
+      "missingSkills": ["Eval frameworks", "Prompt regression testing"],
+      "location": "Palo Alto, CA",
+      "workType": "On-site",
+      "salary": null,
+      "applyMethod": "Company website",
+      "applicantCount": 86,
+      "postedDate": "23 hours ago",
+      "startDate": "August/September 2026",
+      "hiringManager": null,
+      "connections": [
+        {"name": "Ashfaq Ahmed Mohammed", "degree": "2nd/alumni"},
+        {"name": "Others in network", "degree": "2nd/alumni"}
+      ],
+      "sponsorshipRestrictions": false,
+      "fallInternship": true,
+      "notes": "Explicitly Fall 2026; highest skill match (MCP exact match); Tesla brand; AI agents/tools focus"
+    },
+    {
+      "rank": 3,
+      "title": "Summer Internship - Copilot Agent Developer",
+      "company": "ARCCA",
+      "url": "https://www.linkedin.com/jobs/view/4421216735/",
+      "source": "LinkedIn",
+      "score": 48,
+      "skillMatch": "Partial",
+      "skillMatchEmoji": "⚡",
+      "skillMatchPercent": 40,
+      "matchedSkills": ["Agentic Systems", "agent development", "documentation"],
+      "missingSkills": ["Microsoft Copilot Studio"],
+      "location": "Marietta, GA",
+      "workType": "On-site",
+      "salary": null,
+      "applyMethod": "Company website (Paycom ATS)",
+      "applicantCount": 6,
+      "postedDate": "1 hour ago",
+      "hiringManager": null,
+      "connections": [{"name": "Amanda (Stone) Hunt", "degree": "3rd/alumni", "title": "Forensic Engineer Expert"}],
+      "sponsorshipRestrictions": false,
+      "fallInternship": false,
+      "notes": "Summer (not fall) internship; lowest competition (6 applicants); Microsoft Copilot focus vs LangChain stack"
+    }
+  ]
+}

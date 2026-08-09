@@ -1,4 +1,112 @@
 {
+  "profile": {
+    "firstName": "Rukaiya",
+    "lastName": "Khan",
+    "email": "rukaiyak2000@gmail.com",
+    "phone": "+13528706004",
+    "location": {
+      "address": "3100 SW 35th Pl",
+      "city": "Gainesville",
+      "state": "Florida",
+      "stateCode": "FL",
+      "country": "United States",
+      "countryCode": "US",
+      "zip": "32608"
+    },
+    "linkedInUrl": "https://www.linkedin.com/in/rukaiyak2000",
+    "githubUrl": "https://github.com/rukaiyak2000",
+    "portfolioUrl": "",
+    "resumePath": "/Users/rukaiyakhan/Documents/Project/career-outreach-engine/resumes/rukaiya-khan-resume-t.pdf",
+    "workAuthorization": {
+      "authorizedToWork": true,
+      "requiresSponsorshipNow": false,
+      "requiresSponsorshipFuture": true,
+      "visaStatus": "F-1 Student (CPT eligible)",
+      "notes": "Currently enrolled in MS CS at University of Florida. Eligible for CPT for internships. Will require H-1B sponsorship after graduation."
+    },
+    "workHistory": [
+      {
+        "company": "Ncompass",
+        "title": "Software Developer",
+        "location": "Chennai, India",
+        "startDate": "2023-01",
+        "endDate": "2025-08",
+        "current": false,
+        "description": "Architected multi-tenancy support for a global e-commerce platform handling 30+ tenants and 20k+ customers per tenant, with isolated databases and unique feature configurations. Led Node.js migrations v14→v16→v20 with zero downtime. Automated client onboarding workflows using AWS Step Functions, reducing processing times by 80%. Cached frequent configurations in Redis, improving API response times by 90%."
+      },
+      {
+        "company": "Xaltam Technologies",
+        "title": "Software Developer Intern",
+        "location": "New Delhi, India",
+        "startDate": "2020-05",
+        "endDate": "2020-12",
+        "current": false,
+        "description": "Developed and maintained front-end websites and web applications, ensuring responsive design and user-friendly interfaces."
+      }
+    ],
+    "education": [
+      {
+        "school": "University of Florida",
+        "degree": "Master of Science",
+        "field": "Computer Science",
+        "location": "Gainesville, FL",
+        "startDate": "2025-08",
+        "endDate": "2027-05",
+        "current": true,
+        "gpa": ""
+      },
+      {
+        "school": "C.V. Raman Global University",
+        "degree": "Bachelor of Science",
+        "field": "Computer Science",
+        "location": "Bhubaneswar, India",
+        "startDate": "2019-08",
+        "endDate": "2023-05",
+        "current": false,
+        "gpa": "9.0/10.0"
+      }
+    ],
+    "skills": [
+      "Java", "Python", "JavaScript", "TypeScript",
+      "React.js", "React Native", "Next.js", "React Hooks", "Redux",
+      "HTML", "CSS", "Tailwind", "SCSS", "SASS",
+      "Node.js", "Express.js", "Nest.js", "FastAPI", "Flask",
+      "REST APIs", "GraphQL", "WebSockets",
+      "MySQL", "PostgreSQL", "Redis", "MongoDB", "Firebase", "Amazon RDS",
+      "FAISS", "Pinecone", "Chroma",
+      "RAG", "LangChain", "LangGraph", "MCP", "LangSmith",
+      "Vector Search", "Prompt Engineering", "Agentic Systems",
+      "Tool Calling", "Memory & State Management", "LlamaIndex", "AutoGen", "Tavily",
+      "AWS Lambda", "API Gateway", "S3", "SQS", "Step Functions",
+      "Kinesis", "EventBridge", "CodePipeline", "CodeBuild", "CloudWatch", "Cognito",
+      "Docker", "Git", "GitHub Actions", "CI/CD", "Linux",
+      "Puppeteer", "Chromium", "Microservices", "Agile", "Kanban"
+    ],
+    "projects": [
+      {
+        "name": "Pitch Craft",
+        "description": "Automated personalized job outreach pipeline: scrapes JDs, selects best-fit resume via LiteLLM, drafts tailored cold emails, syncs to Notion for approval, sends via Gmail SMTP with resume attachments. Includes vector embeddings for few-shot retrieval and multi-stage follow-ups."
+      },
+      {
+        "name": "Mail Guard",
+        "description": "AI-powered email threat detection tool using LLMs (via LiteLLM) that classifies emails as phishing, spam, or legitimate with confidence scores. Integrated Google OAuth for stateless Gmail access with React inbox UI."
+      },
+      {
+        "name": "Thread Lens",
+        "description": "Chrome extension for real-time AI-powered sentiment analysis inline on Reddit threads, displaying opinion clusters, consensus viewpoints, and debate topics."
+      },
+      {
+        "name": "Finance Dashboard",
+        "description": "Responsive finance dashboard with animated visualizations, AI-powered chat panel using GPT-3.5 LiteLLM proxy, and real-time transaction insights."
+      }
+    ],
+    "awards": [
+      "Google Developer Student Clubs Lead, CVRGU (July 2021 - July 2022) — grew community to 800+ members, organized 8+ events",
+      "Smart India Hackathon Finalist, Ministry of Education's Innovation Cell (February 2022)",
+      "Published Patent: AI-powered interactive virtual campus exploration system (Application ID: 202531060664)",
+      "Published Patent: Automated Crop Disease Detection and Management System (Application ID: 202531061085)"
+    ]
+  },
   "preferences": {
     "targetTitles": [
       "Software Engineer Intern",

@@ -36,35 +36,17 @@ def push_to_notion(jobs: list[dict], dry_run: bool = False) -> tuple[int, int]:
             skipped += 1
             continue
 
-        path, platform = classify(url, job.get("applyMethod", ""))
-
-        skill_match_raw = job.get("skillMatch", "")
-        skill_match = None
-        if skill_match_raw:
-            if "strong" in skill_match_raw.lower():
-                skill_match = "Strong"
-            elif "partial" in skill_match_raw.lower():
-                skill_match = "Partial"
-            elif "weak" in skill_match_raw.lower():
-                skill_match = "Weak"
+        path, _ = classify(url, job.get("applyMethod", ""))
 
         payload = {
             "title": job.get("title", "Unknown Role"),
             "company": job.get("company", ""),
             "job_url": url,
-            "source": job.get("source", "Manual"),
-            "score": job.get("score"),
-            "skill_match": skill_match,
-            "matched_skills": ", ".join(job.get("matchedSkills", [])),
             "path": path,
-            "apply_platform": platform,
         }
 
         if dry_run:
-            logger.info(
-                f"[DRY RUN] {payload['title']} at {payload['company']} "
-                f"| {path} via {platform} | score={payload['score']}"
-            )
+            logger.info(f"[DRY RUN] {payload['title']} at {payload['company']} | {path}")
             added += 1
         else:
             try:

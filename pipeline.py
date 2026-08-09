@@ -100,19 +100,17 @@ def cmd_add(args):
         logger.info(f"Already in Notion: {url}")
         return
 
-    path, platform = classify(url, "")
+    path, _ = classify(url, "")
 
     payload = {
         "title": args.title or "Unknown Role",
         "company": args.company or "",
         "job_url": url,
-        "source": "Manual",
         "path": path,
-        "apply_platform": platform,
     }
 
     if args.dry_run:
-        logger.info(f"[DRY RUN] Would add: {payload['title']} at {payload['company']} ({path} via {platform})")
+        logger.info(f"[DRY RUN] Would add: {payload['title']} at {payload['company']} ({path})")
         return
 
     try:

@@ -49,7 +49,6 @@ def setup_database(parent_page_id: str):
             "Job Title": {"rich_text": {}},
             "HR Email": {"email": {}},
             "Job URL": {"url": {}},
-            "Job Description URL": {"url": {}},
             "Job Description Text": {"rich_text": {}},
             "Path": {
                 "select": {
@@ -59,41 +58,6 @@ def setup_database(parent_page_id: str):
                     ]
                 }
             },
-            "Apply Platform": {
-                "select": {
-                    "options": [
-                        {"name": "LinkedIn", "color": "blue"},
-                        {"name": "Greenhouse", "color": "green"},
-                        {"name": "Ashby", "color": "purple"},
-                        {"name": "Lever", "color": "orange"},
-                        {"name": "Workday", "color": "red"},
-                        {"name": "Rippling", "color": "yellow"},
-                        {"name": "Other", "color": "gray"},
-                        {"name": "Unknown", "color": "default"},
-                    ]
-                }
-            },
-            "Source": {
-                "select": {
-                    "options": [
-                        {"name": "LinkedIn", "color": "blue"},
-                        {"name": "HN", "color": "orange"},
-                        {"name": "Twitter", "color": "gray"},
-                        {"name": "Manual", "color": "default"},
-                    ]
-                }
-            },
-            "Score": {"number": {"format": "number"}},
-            "Skill Match": {
-                "select": {
-                    "options": [
-                        {"name": "Strong", "color": "green"},
-                        {"name": "Partial", "color": "yellow"},
-                        {"name": "Weak", "color": "red"},
-                    ]
-                }
-            },
-            "Matched Skills": {"rich_text": {}},
             "Status": {
                 "select": {
                     "options": [
@@ -177,41 +141,6 @@ def migrate_add_discovery_columns(db_id_or_url: str):
                 ]
             }
         },
-        "Apply Platform": {
-            "select": {
-                "options": [
-                    {"name": "LinkedIn", "color": "blue"},
-                    {"name": "Greenhouse", "color": "green"},
-                    {"name": "Ashby", "color": "purple"},
-                    {"name": "Lever", "color": "orange"},
-                    {"name": "Workday", "color": "red"},
-                    {"name": "Rippling", "color": "yellow"},
-                    {"name": "Other", "color": "gray"},
-                    {"name": "Unknown", "color": "default"},
-                ]
-            }
-        },
-        "Source": {
-            "select": {
-                "options": [
-                    {"name": "LinkedIn", "color": "blue"},
-                    {"name": "HN", "color": "orange"},
-                    {"name": "Twitter", "color": "gray"},
-                    {"name": "Manual", "color": "default"},
-                ]
-            }
-        },
-        "Score": {"number": {"format": "number"}},
-        "Skill Match": {
-            "select": {
-                "options": [
-                    {"name": "Strong", "color": "green"},
-                    {"name": "Partial", "color": "yellow"},
-                    {"name": "Weak", "color": "red"},
-                ]
-            }
-        },
-        "Matched Skills": {"rich_text": {}},
     }
 
     resp = requests.patch(

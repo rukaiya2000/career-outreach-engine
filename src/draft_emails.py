@@ -65,7 +65,7 @@ def draft_email_for_row(row, resumes, dry_run=False):
     job_title = (
         props.get("Job Title", {}).get("rich_text", [{}])[0].get("text", {}).get("content", "")
     )
-    jd_url = props.get("Job Description URL", {}).get("url", "")
+    jd_url = props.get("Job URL", {}).get("url", "")
     jd_text_manual = (
         (props.get("Job Description Text", {}).get("rich_text") or [{}])[0].get("text", {}).get("content", "")
     )
